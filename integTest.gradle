@@ -1,0 +1,16 @@
+sourceSets {
+  integTest {
+    compileClasspath += main.output + test.output
+    runtimeClasspath += main.output + test.output
+  }
+}
+
+
+configurations {
+  integTestCompile.extendsFrom testCompile
+  integTestRuntime.extendsFrom testRuntime
+}
+
+dependencies {
+  testCompile 'org.spockframework:spock-guice:0.7-groovy-2.0'
+}

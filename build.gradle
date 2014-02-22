@@ -1,0 +1,30 @@
+buildscript { 
+  apply from: 'buildscript.gradle'
+}
+
+apply plugin: 'groovy'
+apply plugin: 'maven'
+apply from: 'cobertura.gradle'
+apply from: 'integTest.gradle'
+
+group = 'com.gradle.plugins.jacobo'
+
+repositories { 
+  mavenCentral()
+}
+
+dependencies {
+  compile 'org.codehaus.groovy:groovy-all:2.2.1'
+  compile 'org.slf4j:slf4j-api:1.7.6'
+  compile 'com.google.inject:guice:3.0'
+  compile 'com.google.inject.extensions:guice-assistedinject:3.0'
+  testCompile "org.spockframework:spock-core:0.7-groovy-2.0"
+  testCompile 'cglib:cglib-nodep:2.2'
+  testCompile 'org.objenesis:objenesis:1.2'
+}
+
+test {
+  testLogging {
+    events "passed", "skipped", "failed"
+  }
+}
