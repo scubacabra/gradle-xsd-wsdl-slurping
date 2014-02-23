@@ -5,7 +5,7 @@ import groovy.util.slurpersupport.GPathResult
 import org.slf4j.Logger
 import org.slf4j.LoggerFactory
 
-class DefaultXsdSlurper {
+class DefaultXsdSlurper implements XsdSlurper {
   private static final Logger log = LoggerFactory.getLogger(DefaultXsdSlurper.class)
 
   /**
