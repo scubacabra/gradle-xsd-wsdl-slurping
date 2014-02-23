@@ -5,12 +5,16 @@ sourceSets {
   }
 }
 
-
 configurations {
   integTestCompile.extendsFrom testCompile
   integTestRuntime.extendsFrom testRuntime
 }
 
 dependencies {
-  testCompile 'org.spockframework:spock-guice:0.7-groovy-2.0'
+  integTestCompile 'org.spockframework:spock-guice:0.7-groovy-2.0'
+}
+
+task integTest(type: Test) {
+    testClassesDir = sourceSets.integTest.output.classesDir
+    classpath = sourceSets.integTest.runtimeClasspath
 }
