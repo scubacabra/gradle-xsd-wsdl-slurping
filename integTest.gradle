@@ -15,6 +15,10 @@ dependencies {
 }
 
 task integTest(type: Test) {
-    testClassesDir = sourceSets.integTest.output.classesDir
-    classpath = sourceSets.integTest.runtimeClasspath
+  dependsOn(test)
+  testClassesDir = sourceSets.integTest.output.classesDir
+  classpath = sourceSets.integTest.runtimeClasspath
+  testLogging {
+    events "passed", "skipped", "failed"
+  }
 }
