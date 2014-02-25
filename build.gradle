@@ -1,6 +1,20 @@
 buildscript { 
   apply from: 'buildscript.gradle'
 }
+apply plugin: 'bintray'
+
+bintray {
+  user = bintray_user
+  key = bintray_api_key
+  pkg {
+    repo = bintray_repo
+    name = bintray_package
+    desc = 'Common library used by gradle-wsdl and gradle-jaxb plugin'
+    licenses = ['MIT']
+    labels = ['xsd', 'wsdl', 'gradle', 'plugins', 'gradle plugins']
+  }
+  dryRun = dry // whether to run this as dry-run, without deploying
+}
 
 apply plugin: 'groovy'
 apply plugin: 'maven'
