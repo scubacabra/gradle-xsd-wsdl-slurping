@@ -24,8 +24,17 @@ dependencies {
   testCompile 'org.objenesis:objenesis:1.2'
 }
 
+task groovyDocJar(type: Jar, dependsOn: groovydoc) {
+  classifier = 'groovydoc'
+  from groovydoc.destinationDir
+}
+
 test {
   testLogging {
     events "passed", "skipped", "failed"
   }
+}
+
+artifacts {
+  archives jar, groovyDocJar
 }
