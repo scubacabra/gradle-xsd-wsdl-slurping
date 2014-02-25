@@ -1,0 +1,28 @@
+apply plugin: 'maven-publish'
+apply plugin: 'bintray'
+
+publishing {
+  publications {
+    plugin(MavenPublication) {
+      from components.java
+      
+      artifact groovyDocJar {
+	classifier "groovydoc"
+      }
+    }
+  }
+}
+
+bintray {
+  user = bintray_username
+  key = bintray_api_key
+  publications = ['plugin'] // When uploading Maven-based publication files
+  pkg {
+    repo = 'gradle-plugins'
+    name = 'gradle-xsd-wsdl-slurping'
+    desc = 'Common library used by gradle-wsdl and gradle-jaxb plugin'
+    licenses = ['MIT']
+    labels = ['xsd', 'wsdl', 'gradle', 'plugins', 'gradle plugins']
+  }
+  dryRun = false // whether to run this as dry-run, without deploying
+}
