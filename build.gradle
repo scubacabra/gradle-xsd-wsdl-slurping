@@ -38,3 +38,7 @@ test {
 artifacts {
   archives jar, groovyDocJar
 }
+
+task wrapper(type: Wrapper) {
+    gradleVersion = '1.11'
+}
