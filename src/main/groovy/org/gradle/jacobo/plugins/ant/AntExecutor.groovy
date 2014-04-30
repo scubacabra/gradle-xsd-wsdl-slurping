@@ -9,5 +9,5 @@ interface AntExecutor {
    * @param ant AntBuilder to build and execute
    * @param arguments to configure antBuilder with
    */
-  public void execute(AntBuilder ant, Map<String, Object> arguments)
+  public void execute(AntBuilder ant, Object... arguments)
 }
