@@ -2,17 +2,18 @@ package org.gradle.jacobo.schema.slurper
 
 import groovy.util.slurpersupport.GPathResult
 
+/**
+ * Slurps {@code SchemaDocument}'s dependencies.
+ */
 interface DocumentSlurper {
   
   /**
-   * Slurp the (relative) dependencies in the document.
-   * Return a set of relative dependency path files this
-   * documen depends on.
-   * @param dependencies The nodechildren dependencies to slurp up
-   * @param documentFile the file that is being slurped through
+   * Slurps the dependencies of a {@code SchemaDocument}.
+   * 
+   * @param dependencies  {@link groovy.util.XmlSlurper} dependency nodes
+   *   to slurp up
+   * @param documentFile  slurped xsd file in file system
    * @param dependencyType the type of dependency being slurped
-   *   i.e. wsdl -- import, wsdl -- xsd import, wsdl -- xsd include
-   *        xsd -- import, xsd -- include
    * @return Set of relative path file strings.
    */
   public Set<String> slurpDependencies(GPathResult dependencies,

@@ -1,23 +1,16 @@
 package org.gradle.jacobo.schema.resolver
 
+/**
+ * Service to resolve a relative path to an absolute File.
+ */
 interface AbsoluteFileResolver {
   
   /**
-   * Resolves a string path relative to a certain parent directory into a
-   * File object containing the absolute Path with no relative path
-   * characters.
-   * 
-   * String path can contain any of the symbols used for moving up
-   * directories. '../../someDir' or for continuing deeper in a
-   * directory './someDir' or just 'someDir'.  Returned file object
-   * will contain the absolute path to this  Directory that the parsed
-   * Document resides in (minus these relative path characters)
-   * 
-   * @param relativeLocation relative string pointing to a new relative
-   *   location
-   * @param parentDirectory the parent directory to find the relative
-   *   location to
-   * @return File absolute file path of this relativeLocation
+   * Resolves a relative location to an aboslute path {@link java.io.File}.
+   *
+   * @param relativeLocation  relative path to be resolved
+   * @param parentDirectory  absolute path directory to resolve against
+   * @return resolved {@link java.io.File}
    */
   public File resolveToAbsolutePath(String relativeLocation,
 				    File parentDirectory)

@@ -24,6 +24,13 @@ dependencies {
   testCompile 'org.objenesis:objenesis:1.2'
 }
 
+groovydoc {
+  docTitle = "Schema Slurping Plugin API"
+  link("http://groovy.codehaus.org/gapi/", "groovy.", "org.codehaus.groovy.")
+  link("http://docs.oracle.com/javase/7/docs/api/", "java.")
+  link("http://google-guice.googlecode.com/svn/trunk/javadoc/", "com.google.")
+}
+
 task groovyDocJar(type: Jar, dependsOn: groovydoc) {
   classifier = 'groovydoc'
   from groovydoc.destinationDir

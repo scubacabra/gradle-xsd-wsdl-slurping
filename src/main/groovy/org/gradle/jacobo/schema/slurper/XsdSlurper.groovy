@@ -2,37 +2,44 @@ package org.gradle.jacobo.schema.slurper
 
 import groovy.util.slurpersupport.GPathResult
 
+/**
+ * Slurps and finds XSD specific data
+ */
 interface XsdSlurper {
   
   /**
-   * Slurp the namespace from the XmlSlurper object
-   * Check for @targetNamespace
-   * Or check for xsd:tns if no targetNamesapce
-   * @param slurpedDocument GPathResult slurped document to query
-   * @param documentFile the file that the xmlslurper slurped up
-   * @return namespace from document as a string
+   * Slurps the namespace of the XSD document.
+   * 
+   * @param slurpedDocument  slurped object to operate on
+   * @param documentFile  xsd file in systetm
+   * @return namespace for XSD
    */
   public String slurpNamespace(GPathResult slurpedDocument, File documentFile)
   
   /**
-   * Find resolved Xsd Imports.  Need the absolute path
-   * for parsing the next dependencies and so forth
-   * Finds the absolute File Objects by the relative path keys
-   * @param
-   * @param
-   * @return Set of File objects where the dependencies are located
+   * Finds defined imports on the xsd document.
+   *
+   * @param namespace  the namesapce of the document being operated on
+   * @param importedDependencies  Set of imported dependencies this document
+   *   has defined
+   * @param absoluteDependencies  map of absolute dependencies to query for the
+   *   imported dependencies
+   * @return set of absolute Files
    */
   public Set<File> findResolvedXsdImports(String namespace, 
 					  Set<String> importedDependencies,
 					  Map<String, File> absoluteDependencies)
 
   /**
-   * Find resolved Xsd Includes.  Need the absolute path
-   * for parsing the next dependencies and so forth
-   * Finds the absolute File Objects by the relative path keys
-   * @param
-   * @param
-   * @return Set of File objects where the dependencies are located
+   * Finds defined includes on the xsd document.
+   *
+   * @param namespace  the namesapce of the document being operated on
+   * @param fileName  the name of the xsd document being operated on
+   * @param includedDependencies  Set of included dependencies this document
+   *   has defined
+   * @param absoluteDependencies  map of absolute dependencies to query for the
+   *   imported dependencies
+   * @return set of absolute Files
    */
   public Set<File> findResolvedXsdIncludes(String namespace, String fileName,
 					   Set<String> includedDependencies,

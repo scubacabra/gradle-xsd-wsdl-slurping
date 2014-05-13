@@ -20,8 +20,15 @@ import org.gradle.jacobo.schema.WsdlDocument
 import org.gradle.jacobo.schema.BaseSchemaDocument
 import org.gradle.jacobo.schema.SchemaDocumentFactory
 
+/**
+ * Guice module binding interfaces to implementation classes.
+ * Used to configure everything to run through Guice's {@code createInjector}
+ */
 class DocSlurperModule extends AbstractModule {
   
+  /**
+   * Configures this Guice's module
+   */
   @Override
   protected void configure() {
     // bind ___ interface to ----> ___ implementation

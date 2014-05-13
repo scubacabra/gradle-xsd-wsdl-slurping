@@ -5,16 +5,22 @@ import groovy.util.slurpersupport.GPathResult
 import org.slf4j.Logger
 import org.slf4j.LoggerFactory
 
+/**
+ * Slurps and finds XSD specific data
+ */
 class DefaultXsdSlurper implements XsdSlurper {
   private static final Logger log = LoggerFactory.getLogger(DefaultXsdSlurper.class)
 
   /**
-   * Slurp the namespace from the XmlSlurper object
-   * Check for @targetNamespace
-   * Or check for xsd:tns if no targetNamesapce
-   * @param slurpedDocument the slurped xsd document
-   * @param documentFile the xsd document file
-   * @return namespace from document as a string
+   * Slurps the namespace of the XSD document.
+   * If the namespaces is not defined via {@code xsd:targetNamespace} in the
+   * root attributes, the namespace will be defined as the
+   * {@code documentFile.fileName} of the xsd documents.  A warning is issued
+   * when this happens, but nothing to stop the execution.
+   * 
+   * @param slurpedDocument  slurped object to operate on
+   * @param documentFile  xsd file in systetm
+   * @return namespace for XSD
    */
   @Override
   public String slurpNamespace(GPathResult slurpedDocument, File documentFile) {
@@ -34,14 +40,19 @@ class DefaultXsdSlurper implements XsdSlurper {
   }
   
   /**
-   * Find resolved Xsd Imports.  Need the absolute path
-   * for parsing the next dependencies and so forth
-   * Finds the absolute File Objects by the relative path keys
-   * @param namespace - the xsd namespace
-   * @param fileName - the xsd file name
-   * @param includedDependencies the included dependencies of the xsdDocument
-   * @param absoluteDependencies the absolute dependency map of the xsdDocument
-   * @return Set of File objects where the dependencies are located
+   * Finds defined imports on the xsd document.
+   * In a {@link org.gradle.jacobo.schema.XsdDocument}, the imports and includes
+   * dependencies are saved as sets of Strings (which can be relative paths).
+   * There is also a map of <b>All</b> relative dependencies to their absolute
+   * file objects.  Resolving the imports dependencies is merely a query on the
+   * maps keys for every relative import.
+   *
+   * @param namespace  the namesapce of the document being operated on
+   * @param importedDependencies  Set of imported dependencies this document
+   *   has defined
+   * @param absoluteDependencies  map of absolute dependencies to query for the
+   *   imported dependencies
+   * @return set of absolute Files
    */
   @Override
   public Set<File> findResolvedXsdImports(
@@ -55,14 +66,20 @@ class DefaultXsdSlurper implements XsdSlurper {
   }
 
   /**
-   * Find resolved Xsd Includes.  Need the absolute path
-   * for parsing the next dependencies and so forth
-   * Finds the absolute File Objects by the relative path keys
-   * @param namespace - the xsd namespace
-   * @param fileName - the xsd file name
-   * @param includedDependencies the included dependencies of the xsdDocument
-   * @param absoluteDependencies the absolute dependency map of the xsdDocument
-   * @return Set of File objects where the dependencies are located
+   * Finds defined imports on the xsd document.
+   * In a {@link org.gradle.jacobo.schema.XsdDocument}, the imports and includes
+   * dependencies are saved as sets of Strings (which can be relative paths).
+   * There is also a map of <b>All</b> relative dependencies to their absolute
+   * file objects.  Resolving the includes dependencies is merely a query on
+   * the maps keys for every relative import.
+   *
+   * @param namespace  the namesapce of the document being operated on
+   * @param fileName  the name of the xsd document being operated on
+   * @param includedDependencies  Set of included dependencies this document
+   *   has defined
+   * @param absoluteDependencies  map of absolute dependencies to query for the
+   *   imported dependencies
+   * @return set of absolute Files
    */
   @Override
   public Set<File> findResolvedXsdIncludes(
@@ -77,7 +94,17 @@ class DefaultXsdSlurper implements XsdSlurper {
   }
   
   /**
-   * Actual resolving of a list of dependencies
+   * Generally resolves a set of dependencies for the {@code XsdDocument}.
+   * Resolves a set of dependencies against a map that has those same dependencies
+   * as keys and the absolute Files as values.
+   * <p>
+   * If the dependency is not found in the map, a warning is logged and {@code null} is
+   * inserted into the returned set.
+   *
+   * @param dependencies  dependency strings
+   * @param absoluteDependencies  map of keys and values to query against
+   * @return set of absolute Files that correspond to the {@code XsdDocument}
+   *   dependencies
    */
   def resolveDependencies(Set<String> dependencies, Map<String, File> absoluteDependencies) {
     def resolvedDependencies = dependencies.collect { dependency ->

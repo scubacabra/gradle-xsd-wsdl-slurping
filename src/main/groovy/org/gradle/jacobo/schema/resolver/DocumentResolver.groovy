@@ -1,22 +1,21 @@
 package org.gradle.jacobo.schema.resolver
 
+/**
+ *  Service object to resolve a {@code SchemaDocument}'s dependencies (which are
+ *  usually relative paths) into absolute paths.
+ */
 interface DocumentResolver {
   
   /**
-   * Resolve relative dependencies to absolute file objects relative to the
-   * Directory that the parsed Document resides in.
-   *   i.e. parsed file @ /some/dir/file.xsd and has dependencies of
-   *     ../otherDir/other.xsd and subDir/sub.xsd then these relative paths
-   *     would be resolved to /some/otherDir/other.xsd and
-   *     /some/dir/subDir/sub.xsd.
+   * Resolves relative path dependencies into their absolute path
+   * {@link java.io.File} object (relative to the document's current directory).
    *
-   * Uses AbsoluteFileResolver to resolve relative paths
-   * 
-   * @param relative dependency paths to resolve (both
-   *   imports and includes dependencies)
-   * @param documentDirectory directory of the parsed schema document
-   * @return map where Relative dependency is a key and absolute
-   *   file object is a value, for lookup later
+   * @param relativeDependencies  relative path dependencies of a
+   * {@link org.gradle.jacobo.schema.SchemaDocument}.
+   * @param documentDirectory  the parent directory of the {@code SchemaDocument}
+   * that is being resolved.
+   * @return map of relative dependecy Strings as keys and their absolute File
+   * as values
    */
   public Map<String, File> resolveRelativePaths(
     Set<String> relativeDependencies,

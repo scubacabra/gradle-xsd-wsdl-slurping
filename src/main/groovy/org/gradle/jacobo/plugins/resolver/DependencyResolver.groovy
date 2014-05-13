@@ -1,10 +1,14 @@
 package org.gradle.jacobo.plugins.resolver
 
+/**
+ * Resolves {@code SchemaDocument}'s dependencies.
+ */
 interface DependencyResolver {
   
   /**
-   * Resolve dependencies of the document
-   * @param document - document File to resolve
+   * Resolves dependencies of {@code File}.
+
+   * @param document  file to resolve
    * @return Set of files this document depends on
    */
   public Set<File> resolveDependencies(File document)
