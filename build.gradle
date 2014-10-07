@@ -36,6 +36,11 @@ task groovyDocJar(type: Jar, dependsOn: groovydoc) {
   from groovydoc.destinationDir
 }
 
+task groovySourceJar(type: Jar, dependsOn: 'jar') {
+  classifier = 'sources'
+  from sourceSets.main.allSource
+}
+
 test {
   testLogging {
     events "passed", "skipped", "failed"
