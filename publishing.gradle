@@ -1,5 +1,5 @@
 apply plugin: 'maven-publish'
-apply plugin: 'bintray'
+apply plugin: 'com.jfrog.bintray'
 
 publishing {
   publications {
@@ -26,7 +26,12 @@ bintray {
     name = 'gradle-xsd-wsdl-slurping'
     desc = 'Common library used by gradle-wsdl and gradle-jaxb plugin'
     licenses = ['GPL-2.0']
+    websiteUrl = 'https://github.com/jacobono/gradle-xsd-wsdl-slurping'
+    issueTrackerUrl = 'https://github.com/jacobono/gradle-xsd-wsdl-slurping/issues'
+    vcsUrl = 'https://github.com/jacobono/gradle-xsd-wsdl-slurping.git'
+    publicDownloadNumbers = true
     labels = ['xsd', 'wsdl', 'gradle', 'plugins', 'gradle plugins']
   }
-  dryRun = false // whether to run this as dry-run, without deploying
+  dryRun = true // whether to run this as dry-run, without deploying
+  publish = true //If version should be auto published after an upload
 }
