@@ -21,7 +21,7 @@ bintray {
     repo = 'gradle-plugins'
     name = 'gradle-xsd-wsdl-slurping'
     desc = 'Common library used by gradle-wsdl and gradle-jaxb plugin'
-    licenses = ['MIT']
+    licenses = ['GPL-2.0']
     labels = ['xsd', 'wsdl', 'gradle', 'plugins', 'gradle plugins']
   }
   dryRun = false // whether to run this as dry-run, without deploying
