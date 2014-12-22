@@ -2,8 +2,8 @@ buildscript {
   apply from: 'buildscript.gradle'
 }
 
-group = 'org.gradle.jacobo'
-version = '1.1.1'
+group = 'com.github.jacobono'
+version = '1.1.2'
 
 apply from: 'publishing.gradle'
 apply plugin: 'groovy'

@@ -1,3 +1,7 @@
+1.2
+===
+Group changed from `org.grade.jacobo.plugins` to `com.github.jacobono`
+
 1.1
 ===
 completed groovy doc and markdown documentation.

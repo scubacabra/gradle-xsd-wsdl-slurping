@@ -1,7 +1,7 @@
 xsd and wsdl slurping library
 =============================
 
-This is just a common library for the plugins I developed
+This is just a common library for gradle plugins
 
 * [gradle-wsdl-plugin](https://github.com/jacobono/gradle-wsdl-plugin)
 * [gradle-jaxb-plugin](https://github.com/jacobono/gradle-jaxb-plugin)
